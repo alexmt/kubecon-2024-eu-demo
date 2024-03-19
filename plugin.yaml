@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: helmfile
+spec:
+  init:
+    command:
+      - argo-cd-helmfile.sh
+    args:
+      - init
+  generate:
+    command:
+      - argo-cd-helmfile.sh
+    args:
+      - generate
+  discover:
+    find:
+      glob: helmfile.{yaml,yml}
+  parameters:
+    dynamic:
+      command:
+        - argo-cd-helmfile.sh
+      args:
+        - parameters
